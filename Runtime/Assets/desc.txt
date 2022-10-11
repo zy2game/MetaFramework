@@ -1,0 +1,48 @@
+ ///从网络上加载资源
+ ///资源名唯一,不同玩家上传的同一位置的资源使用玩家id区分
+ ///相同类型的资源可以用版本号区分,同一位置使用的资源玩家每次上传更新的资源名带版本号
+ ///资源地址:http://wwww.test.com/assetserver/(玩家ID位置ID_版本.后缀名||资源名_版本.后缀名)
+ ///后缀名用于区分是什么类型的资源(*.png *.jpg|图片 *.mp3 *.wav *.ogg|音频 *.unity3d|ab包 *.mp4|视频文件 *.txt|文本 *.bin|二进制数据)
+ ///玩家ID_位置ID_版本用于判断是否替换本地资源和清理缓存  
+  
+  //加载文本
+  ResourcesManager.Instance.LoadAsync("http://127.0.0.1:8081/testasset/remoteassets/text_1.txt").callback = (o) =>
+  {
+      Debug.Log((o as WebAssetHandle)?.text);
+  };
+
+  //加载图片
+  ResourcesManager.Instance.LoadAsync("http://127.0.0.1:8081/testasset/remoteassets/image_1.png").callback = (o) =>
+  {
+      Debug.Log(o.LoadAsset(null) as Texture2D);
+  };
+
+  //加载音频
+  ResourcesManager.Instance.LoadAsync("http://127.0.0.1:8081/testasset/remoteassets/audio_1.mp3").callback = (o) =>
+  {
+      Debug.Log(o.LoadAsset(null) as AudioClip);
+  };
+
+  //加载ab包
+  ResourcesManager.Instance.LoadAsync("http://127.0.0.1:8081/testasset/remoteassets/assetbundle_1.unity3d").callback = (o) =>
+  {
+      Debug.Log(o.CreateGameObject(null,"cube"));
+  };
+
+  //加载视频
+  ResourcesManager.Instance.LoadAsync("http://127.0.0.1:8081/testasset/remoteassets/video_1.mp4").callback = (o) =>
+  {
+      string videoPath = (o as WebAssetHandle)?.videoPath;
+      Debug.Log(videoPath);
+      if (string.IsNullOrEmpty(videoPath)) return;
+      UnityEngine.Video.VideoPlayer videoPlayer = GetComponent<UnityEngine.Video.VideoPlayer>();
+      if (!videoPlayer) return;
+      videoPlayer.url = videoPath;
+      videoPlayer.Play();
+  };
+
+  //加载数据
+  ResourcesManager.Instance.LoadAsync("http://127.0.0.1:8081/testasset/remoteassets/bytes_1.bin").callback = (o) =>
+  {
+      Debug.Log((o as WebAssetHandle)?.data.Length);
+  };

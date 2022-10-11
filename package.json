@@ -1,0 +1,9 @@
+{
+    "name": "com.zygame.gameframework",
+    "displayName": "GameFramework",
+    "description": "My Game Framework!",
+    "version": "1.2.1",
+    "unity": "2018.3",
+    "license": "MIT",
+    "dependencies": {}
+}

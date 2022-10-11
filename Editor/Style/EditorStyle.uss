@@ -1,0 +1,33 @@
+GridBackground
+{
+    --grid-background-color: #282828;
+    --line-color: rgba(0, 0, 0, 0.18);
+    --thick-line-color: rgba(0, 0, 0, 0.38);
+    --spacing:15
+}
+
+Box
+{
+	width:300;
+	height:100%;
+}
+
+ScrollView
+{
+	width:300;
+	height:100%;
+}
+
+IMGUIContainer
+{
+	background-color: #303030;
+	width:300px;
+	height:100%;
+}
+
+Image
+{
+
+	width:140;
+	height:100;
+}
